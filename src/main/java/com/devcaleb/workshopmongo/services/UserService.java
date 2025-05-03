@@ -1,5 +1,6 @@
 package com.devcaleb.workshopmongo.services;
 
+import com.devcaleb.workshopmongo.dto.UserDTO;
 import com.devcaleb.workshopmongo.entities.User;
 import com.devcaleb.workshopmongo.repositories.UserRepository;
 import com.devcaleb.workshopmongo.services.exceptions.ObjectNotFoundException;
@@ -22,5 +23,13 @@ public class UserService {
     public User findById(String id){
         Optional<User> obj = userRepository.findById(id);
         return obj.orElseThrow(() -> new ObjectNotFoundException("Object not found!"));
+    }
+
+    public User insert(User obj){
+        return userRepository.insert(obj);
+    }
+
+    public User fromDTO(UserDTO obj){
+        return new User(obj.getId(), obj.getName(), obj.getEmail());
     }
 }
